@@ -5,13 +5,7 @@ import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import { useWalletContext } from "../store/Wallet";
 import TitleImage from "@/public/svgs/title.svg";
-import TitleImageMobile from "@/public/logo.png";
-import WalletSvgIcon from "@/public/svgs/wallet.svg";
 import { useRouter, usePathname } from "next/navigation";
-import Modal from "../components/Modal";
-import Metamask from "@/public/images/meta-mask.png";
-import Menu from "../components/Menu";
-import { isMobileDevice } from "../utils/deviceDetector";
 
 const Header = ({ className, ...props }) => {
   const {
@@ -19,7 +13,6 @@ const Header = ({ className, ...props }) => {
     address,
     isConnected,
     connectionStatus,
-    connectionError,
     isConnecting,
   } = useWalletContext();
 
@@ -28,39 +21,9 @@ const Header = ({ className, ...props }) => {
   const router = useRouter();
   const [showMobileWarning, setShowMobileWarning] = useState(false);
 
-  useEffect(() => {
-    const handleAsyncConnect = async () => {
-      if (pathname === "/connect" && !isConnected) {
-        await handleConnect();
-      }
-    };
 
-    handleAsyncConnect();
-  }, [pathname]);
 
-  // Function to truncate address for display
-  const truncateAddress = (address: string) => {
-    if (!address) return "";
-    return `${address.slice(0, 6)}...${address.slice(-4)}`;
-  };
 
-  const handleConnect = async () => {
-    try {
-      if (isMobileDevice()) {
-        setShowMobileWarning(true);
-        return;
-      }
-
-      if (pathname === "/") {
-        router.push("/connect");
-      } else {
-        setShow(true);
-        await connect();
-      }
-    } catch (error) {
-      console.error("Failed to connect:", error);
-    }
-  };
 
   useEffect(() => {
     // If there's an address but not connected, try to connect
@@ -120,30 +83,7 @@ const Header = ({ className, ...props }) => {
       <header
         className={`flex items-center justify-between opacity-100 h-[86px] sm:h-[64px] md:h-[64px] fixed left-0 right-0 top-0 z-10 px-12 sm:px-[18px] md:px-[18px] border-b border-solid border-[rgba(255,255,255,0.2)] ${className}`}
       >
-        <div className="flex items-center gap-2">
-          <a
-            //   href="/"
-            onClick={() => router.push("/")}
-            className="cursor-pointer sm:w-[120px] md:w-[120px]  sm:h-3 md:h-3 "
-          >
-            <div className="w-[174px]  flex items-center justify-center sm:w-[120px] md:w-[120px] sm:h-3 md:h-3">
-              <TitleImage className="w-full h-full" />
-            </div>
-            {/* <img className="" src={TitleImage.src} width={174} alt="Home" /> */}
-          </a>
-        </div>
-
-        <div>
-          <Button
-            className="sm:w-[120px] md:w-[120px] sm:h-[30px] md:h-[30px] sm:text-sm md:text-sm h-[40px] w-[150px] !p-0"
-            mode="primaryContained"
-            onClick={handleConnect}
-            disabled={isConnecting}
-            rounded
-          >
-            {getButtonContent()}
-          </Button>
-        </div>
+        
       </header>
     </>
   );

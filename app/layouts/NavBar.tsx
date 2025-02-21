@@ -13,7 +13,7 @@ export default function Navbar({className = ""}) {
   };
 
   return (
-    <nav className={clsx("bg-gray-800 text-white", className)}>
+    <nav className={clsx("bg-gray-800 bg-opacity-30 text-white fixed top-0 left-0 right-0 z-20", className)}>
       <div className="container mx-auto flex items-center justify-between p-4">
         <Link className="text-xl font-bold hover:text-gray-300" href="/">
           後臺系統
@@ -21,17 +21,17 @@ export default function Navbar({className = ""}) {
         {/* 桌機版選單 */}
         <div className="hidden md:flex space-x-4">
           <Link href="/">
-            <Button variant="outline" className="hover:bg-gray-700">
+            <Button  className="hover:bg-gray-700">
               建立投票事件
             </Button>
           </Link>
           <Link href="/generate-tickets">
-            <Button variant="outline" className="hover:bg-gray-700">
+            <Button    className="hover:bg-gray-700">
               票券產生
             </Button>
           </Link>
           <Link href="/live-vote-count">
-            <Button variant="outline" className="hover:bg-gray-700">
+            <Button  className="hover:bg-gray-700">
               投票結果
             </Button>
           </Link>
@@ -49,7 +49,7 @@ export default function Navbar({className = ""}) {
       </div>
       {/* 手機版選單內容 */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-gray-700">
+        <div className="md:hidden bg-gray-800 ">
           <div className="flex flex-col space-y-2 p-4">
             <Link href="/" onClick={() => setMobileMenuOpen(false)}>
               <Button variant="ghost" className="w-full text-left">
