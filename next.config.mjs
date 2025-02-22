@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
   webpack(config) {
     config.module.rules.push({
@@ -32,7 +33,10 @@ const nextConfig = {
     rules: {
       'react/no-unescaped-entities': 'off'
     }
-  }
+  },
+  env: {
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+  },
 };
 
 export default nextConfig;

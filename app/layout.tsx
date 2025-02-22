@@ -37,7 +37,7 @@ export default function RootLayout({
           >
             {/* <Header className="z-20" /> */}
             <NavBar className={"z-20"} />
-            <div className="w-full overflow-x-hidden max-w-[1920px] mx-auto min-h-[100dvh] mt-[86px]">
+            <div className="w-full overflow-x-hidden max-w-[1920px] mx-auto min-h-[calc(100dvh)] pt-[76px]">
               {children}
             </div>
           </body>
